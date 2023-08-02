@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         set_time_limit(0);
         // build response headers so file downloads.
         $zip = new \ZipArchive();
@@ -26,8 +26,12 @@ class HomeController extends Controller
             $zip->addFile($file, basename($file));
         }
         $zip->close();
-        return response()->json([
-            'url' => last(explode('/',$fileUri))
-        ]);
+        if ($request->exists('ajax')) {
+            return response()->json([
+                'url' => last(explode('/',$fileUri))
+            ]);
+        } else {
+            return response()->download($fileUri);
+        }
     }
 }

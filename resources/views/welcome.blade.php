@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
         <style>
             html, body {
                 background-color: #fff;
@@ -49,15 +50,15 @@
                 font-size: 84px;
             }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+            /*.links > a {*/
+            /*    color: #636b6f;*/
+            /*    padding: 0 25px;*/
+            /*    font-size: 12px;*/
+            /*    font-weight: 600;*/
+            /*    letter-spacing: .1rem;*/
+            /*    text-decoration: none;*/
+            /*    text-transform: uppercase;*/
+            /*}*/
 
             .m-b-md {
                 margin-bottom: 30px;
@@ -83,13 +84,29 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <button id="download" class="btn btn-success">Tải file với js</button>
+                    <a href="/download" target="_blank" class="btn btn-primary">Tải file</a>
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+        <script>
+            $('#download').click(function () {
+                let self = $(this);
+                self.html(`<div class="spinner-border text-light" role="status"></div>`)
+                $.ajax({
+                    url: "/download",
+                    data: {
+                        ajax: true
+                    }
+                }).done(function(res) {
+                    self.html(`Tải xuống`)
+                    console.log(res)
+                    console.log(res.url)
+                    window.open(res.url, '_blank');
+                });
+            })
+        </script>
     </body>
 </html>

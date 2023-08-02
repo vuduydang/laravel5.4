@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
         <style>
             html, body {
                 background-color: #fff;
@@ -83,6 +84,7 @@
                 </div>
 
                 <div class="links">
+                    <button id="download" class="btn btn-success">Tải file</button>
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
@@ -91,5 +93,19 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+        <script>
+            $('#download').click(function () {
+                let self = $(this);
+                self.html(`<div class="spinner-border text-light" role="status"></div>`)
+                $.ajax({
+                    url: "/download",
+                }).done(function(res) {
+                    self.html(`Tải xuống`)
+                    window.open(res.url, '_blank');
+                });
+            })
+        </script>
     </body>
 </html>

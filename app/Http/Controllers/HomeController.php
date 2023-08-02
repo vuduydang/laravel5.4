@@ -27,7 +27,7 @@ class HomeController extends Controller
         }
         $zip->close();
         return response()->json([
-            'url' => last(explode('.',$fileUri))
+            'url' => last(explode('/',$fileUri))
         ]);
     }
 }
